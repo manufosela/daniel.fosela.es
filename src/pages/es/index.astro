@@ -1,0 +1,43 @@
+---
+import Layout from '~/layouts/Layout.astro'
+import Header from '~/components/Header.astro'
+import Footer from '~/components/Footer.astro'
+import Card from '~/components/Card.astro'
+import AboutMe from '~/components/AboutMe.astro'
+import Work from '~/components/Work.astro'
+import Technologies from '~/components/Technologies.astro'
+import Career from '~/components/Career.astro'
+
+import '~/styles/index.css';
+
+import { Site } from '~/data/config';
+const title = Site.title;
+const language = "es";
+---
+
+<Layout {title} includeSchema={true}>
+  <Header class="header" title={title} active="Inicio" language={language} />
+  <main>
+    <Card language={language} />
+    <AboutMe language={language} />
+    <Work language={language} />
+    <Technologies language={language} />
+    <Career language={language} />
+  </main>
+  <Footer language={language} />
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    window.onscroll = function() {
+      const header = document.querySelector(".header");
+      if (header) {
+        if (window.scrollY > 0) {
+          header.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        } else {
+          header.style.backgroundColor = "rgba(0, 0, 0, 1)";
+        }
+      }
+    }
+  });
+</script>

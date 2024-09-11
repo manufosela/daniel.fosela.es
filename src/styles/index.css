@@ -1,0 +1,12 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin:0;
+  margin-top: 7vh;
+  padding:0;
+  background-color: var(--primary-color);
+  max-width: 100%;
+}
+

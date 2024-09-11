@@ -1,0 +1,70 @@
+---
+import { Career as careersData } from '~/data/config';
+
+const { language } = Astro.props;
+
+const {title, experiences} = careersData[language] || [];
+---
+<a name="career"></a>
+<div class="career-content">
+  <h2>{title}</h2>
+  <div class="career-cards">
+    {experiences.map((experience: { date: string; description: string;}, index: number) => (
+      <ul>
+        <li class="career-card" id={`career${index}`}>
+          <h3>{experience.date}</h3>
+          <p>{experience.description}</p>
+        </li>
+      </ul>
+    ))}
+</div>
+
+<style>
+  .career-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: 0;
+    padding: var(--element-padding);
+    gap:1rem;
+    background-color: var(--background-light);
+    max-width: var(--element-max-width);
+    width:100%;
+  }
+  .career-content h2 {
+    font-size:3rem;
+  }
+  .career-content li {
+    margin-bottom: 3rem;
+  }
+
+  @media screen and (max-width: 991px) {
+  }
+  @media screen and (max-width: 767px) {
+    .career-content {
+      margin:0;
+      padding:0;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+    .career-content h2 {
+      font-size:1.3rem;
+      margin:0;
+      padding: 0;
+      margin-top:3rem;
+    }
+    .career-content ul {
+      margin:0;
+      padding: 0;
+    }
+    .career-content li {
+      margin:0;
+      padding: 0;
+      margin-bottom: 1rem;
+      list-style: none;
+    }
+  }
+  @media screen and (max-width: 479px) {
+  }
+</style>

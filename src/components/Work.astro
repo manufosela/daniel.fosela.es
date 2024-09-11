@@ -1,0 +1,113 @@
+---
+import { Work as WorkData } from '~/data/config';
+
+interface WorkDataIndex {
+  [key: string]: any;
+}
+
+const { language } = Astro.props;
+
+const {title, description, works } = (WorkData as WorkDataIndex)[language as string] || [];
+---
+<a name="work"></a>
+<div class="work-content">
+  <h2>{title}</h2>
+  <p>{description}</p>
+  <div class="work-cards">
+  {works.map((work: { title: string; description: string; logo: string, link: string }, index: number) => (
+    <div class="work-card" id={`work${index}`}>
+      <a href={work.link} target="_blank" rel="noopener noreferrer" class="link-logo">
+        <img src={work.logo} alt={work.title} class="work-logo" width="100" />
+      </a>
+      <a href={work.link} target="_blank" rel="noopener noreferrer" class="title">
+        {work.title}
+      </a>
+      <p>{work.description}</p>
+    </div>
+  ))}
+  </div>
+</div>
+
+<style>
+  .work-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: 0;
+    padding: var(--element-padding);
+    gap:1rem;
+    background-color: var(--background-light);
+    max-width: var(--element-max-width);
+  }
+  .work-content h2 {
+    font-size:3rem;
+  }
+  .work-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .work-card {
+    flex: 1 1 calc(33.33% - 1rem);
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+  }
+  .work-card p {
+    margin-top: 1.2rem;
+  }
+  .work-card .work-logo {
+    max-width: 100%;
+    display: block;
+    margin: 0;
+  }
+  .work-card .link-logo {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 100px;
+  }
+  .work-card .title {
+    text-decoration: none;
+    color: var(--background-dark);
+  }
+
+
+
+  @media screen and (max-width: 991px) {
+  }
+  @media screen and (max-width: 767px) {
+    .work-content {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+    .work-content h2 {
+      font-size:1.3rem;
+      margin-top:3rem;
+    }
+    .work-cards {
+      flex-direction: column;
+    }
+    .work-card {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+    .work-card .link-logo {
+      flex-direction: row;
+    }
+    .work-card .title {
+
+    }
+    .work-card p {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 479px) {
+  }
+
+</style>

@@ -1,0 +1,166 @@
+---
+import { Card as card } from '~/data/config';
+
+const { language } = Astro.props;
+
+const person = card[language] || {};
+
+const { greeting, title, rol, whoami, image, button, link  } = person as { greeting: string, title: string, rol: string, whoami: string, image: string, button: string, link: string };
+---
+
+<div class="card-content">
+  <section class="info">
+    <div class="greeting">{greeting}</div>
+    <div class="titlerol">
+      <div class="title">{title}</div>
+      <div class="rol">{rol}</div>
+    </div>
+    <div class="whoami">{whoami}</div>
+    <a href={link} class="button">{button}</a>
+  </section>
+  <section class="image-container">
+    <div class="shadow-box"></div>
+    <img src={image} alt={title} />
+  </section>
+</div>
+
+<style>
+  .card-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    margin: 0;
+    padding: var(--element-padding);
+    width: 100%;
+    max-width:var(--element-max-width);
+    height: 400px;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    justify-content: center;
+    margin: 2rem 0;
+    width:70%;
+    max-width: 40rem;
+  }
+  .image-container {
+    position: relative;
+    display: inline-block;
+  }
+  .image-container img {
+    max-width: 300px;
+    display: block;
+    position: relative;
+    z-index: 2;
+    border: 5px solid black;
+  }
+
+  .image-container .shadow-box {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: calc(100%);
+    height: calc(100%);
+    background-color: var(--secondary-color);
+    border: 5px solid black;
+    z-index: 1;
+  }
+  .info {
+    width: 100%;
+  }
+  .greeting{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .titlerol {
+    display: flex;
+    flex-direction: row;
+    align-items: self-start;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  .rol {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    color: var(--tertiary-color);
+  }
+  .whoami {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .button {
+    background-color: var(--tertiary-color);
+    border: none;
+    color: white;
+    margin-top: 3rem;
+    padding: 0.5rem;
+    width: 12rem;
+    height: 3.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    text-decoration: none;
+  }
+
+
+  @media screen and (max-width: 991px) {
+
+  }
+  @media screen and (max-width: 767px) {
+    .card-content {
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      height: 650px;
+      padding-left: 1rem;
+      padding-top: 1rem;
+      margin:0;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      width:100%;
+      order: 1;
+      margin-bottom:2rem;
+    }
+    .info {
+      order: 2;
+    }
+    .image-container img {
+      width: 100%;
+      height: auto;
+    }
+    .greeting{
+      padding:0;
+      font-size: 1rem;
+    }
+    .titlerol {
+      padding:0;
+      margin:0;
+      flex-direction: row;
+      justify-content: start;
+      align-items: self-start;
+      width:100%;
+    }
+    .title, .rol {
+      font-size: 1.1rem;
+    }
+    .whoami {
+      font-size: 1.1rem;
+    }
+  }
+  @media screen and (max-width: 479px) {
+  }
+  </style>

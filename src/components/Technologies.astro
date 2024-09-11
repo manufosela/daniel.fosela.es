@@ -1,0 +1,85 @@
+---
+import { Technologies as technologiesData } from '~/data/config';
+
+const { language } = Astro.props;
+
+const {title, description, logos} = technologiesData[language] || [];
+---
+<a name="technologies"></a>
+<div class="tech-content">
+  <h2>{title}</h2>
+  <p class="tech-desc">{description}</p>
+  <section class="tech-cards">
+      {logos.map((logo: { image: string | null | undefined; title: string; }) => (
+        <div class="tech-logo">
+          <img src={logo.image} alt={logo.title} width="100" />
+          <p class="tech-logotitle">{logo.title}</p>
+        </div>
+      ))}
+  </section>
+</div>
+
+<style>
+  .tech-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin: 0;
+    padding: var(--element-padding);
+    gap:1rem;
+    background-color: var(--background-light);
+    max-width: var(--element-max-width);
+    width:100%;
+  }
+  .tech-content h2 {
+    font-size:3rem;
+  }
+  .tech-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr)); /* Ajusta el número de columnas */
+    gap: 1rem;
+    width: 100%;
+  }
+  .tech-cards .tech-logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    text-align: center;
+  }
+  .tech-cards .link-logo {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .tech-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .tech-logotitle {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+
+
+  @media screen and (max-width: 991px) {
+  }
+  @media screen and (max-width: 767px) {
+    .tech-content {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+    .tech-content h2 {
+      font-size:1.3rem;
+      margin-top:3rem;
+    }
+  }
+  @media screen and (max-width: 479px) {
+  }
+</style>

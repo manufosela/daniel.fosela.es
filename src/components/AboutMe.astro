@@ -1,0 +1,45 @@
+---
+import { Aboutme as aboutMe } from '~/data/config';
+
+const { language } = Astro.props;
+
+const { title, description } = aboutMe[language];
+
+---
+<a name="aboutme"></a>
+<div class="about-content">
+  <h2>{title}</h2>
+  <p set:html={description.replace(/\n/g, '<br>')}></p>
+</div>
+
+<style>
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin: 0;
+    padding: var(--element-padding);
+    gap:1rem;
+    background-color: var(--background-light);
+    max-width: var(--element-max-width);
+  }
+  .about-content h2 {
+    font-size:3rem;
+  }
+
+  @media screen and (max-width: 991px) {
+  }
+  @media screen and (max-width: 767px) {
+    .about-content {
+      padding: 1rem;
+      font-size: 1rem;
+    }
+    .about-content h2 {
+      font-size:1.3rem;
+      margin-top:3rem;
+    }
+  }
+  @media screen and (max-width: 479px) {
+  }
+</style>
